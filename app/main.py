@@ -1,11 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routes.oracle_routes import router as oracle_router
+# IMPORTANT: Import your bonds router here!
+# from app.routes.bond_routes import router as bond_router 
 
-# 1. CREATE THE APP FIRST
-app = FastAPI()
+app = FastAPI()  # BUILD IT FIRST
 
-# 2. THEN ADD MIDDLEWARE
+# CONFIGURE IT SECOND
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -14,5 +15,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# 3. THEN INCLUDE ROUTERS
+# CONNECT ROUTES LAST
 app.include_router(oracle_router)
+# app.include_router(bond_router, prefix="/api/v1")
